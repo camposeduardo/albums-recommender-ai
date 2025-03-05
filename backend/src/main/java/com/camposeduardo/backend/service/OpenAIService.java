@@ -28,10 +28,11 @@ public class OpenAIService {
         this.chatClient = builder.build();
     }
 
-    public List<Album> recommender(@RequestParam String userPrompt){
+    public List<Album> recommender(String album, String artist){
         String systemPrompt = getPrompt("src/main/resources/prompt.txt");
+        String albumAndArtist = album + "," + artist;
         var system = new SystemMessage(systemPrompt);
-        var user = new UserMessage(userPrompt);
+        var user = new UserMessage(albumAndArtist);
         Prompt prompt = new Prompt(List.of(system, user));
         return convertJsonToList(chatClient.prompt(prompt).call().content());
     }
