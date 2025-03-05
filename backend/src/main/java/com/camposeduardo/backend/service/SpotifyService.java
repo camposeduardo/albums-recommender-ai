@@ -37,7 +37,7 @@ public class SpotifyService {
         if (response.getBody() == null || searchResponse.albumsWrapper().albums() == null) {
             throw new RuntimeException();
         }
-        
+
         return searchResponse.albumsWrapper().albums();
     }
 }

@@ -22,7 +22,7 @@ public class SpotifyLoginService {
 
     String clientId = System.getenv("CLIENT_ID");
 
-    public Map<String, String> requestUserAuthorization () {
+    public Map<String, String> createUserAuthURL() {
         String codeVerifier = authService.generateCodeVerifier(64);
         String codeChallenge = authService.generateCodeChallenge(codeVerifier);
 
