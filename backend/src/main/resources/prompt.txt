@@ -24,10 +24,11 @@ If generating a full list of five recommendations is not possible, return:
   "status": 400,
   "message": "Error description here."
 }
+
 ## Additional Notes:
 - Ensure each recommended album has a **title**, an **artist**, and a **release year** (if available).
 - If an exact release year is unknown, exclude the `"year"` key instead of providing an incorrect or estimated value.
 - Avoid recommending multiple albums from the same artist unless necessary.
 - **Shuffle the order** of recommendations on each response to add variety.
 - The JSON output must be valid and properly formatted.
-- "Do not include code block delimiters like ```json. Return only pure JSON."
+- "Do not include code block delimiters like ```json,  "recommendations", or "Albums". Return only pure JSON."
