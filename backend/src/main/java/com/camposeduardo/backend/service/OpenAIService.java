@@ -1,6 +1,7 @@
 package com.camposeduardo.backend.service;
 
 import com.camposeduardo.backend.domain.Album;
+import com.camposeduardo.backend.dto.SpotifyAlbumInformationDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,18 +21,24 @@ import java.util.List;
 public class OpenAIService {
 
     private final ChatClient chatClient;
+    private final SpotifyService spotifyService;
 
-    public OpenAIService(ChatClient.Builder builder) {
+    public OpenAIService(ChatClient.Builder builder, SpotifyService spotifyService) {
+        this.spotifyService = spotifyService;
         this.chatClient = builder.build();
     }
 
-    public List<Album> recommender(String album, String artist){
+    public List<SpotifyAlbumInformationDTO> generateAlbumRecommendations(String album,
+                                                                         String artist,
+                                                                         String token){
         String systemPrompt = getPrompt("src/main/resources/prompt.txt");
         String albumAndArtist = album + "," + artist;
         var system = new SystemMessage(systemPrompt);
         var user = new UserMessage(albumAndArtist);
         Prompt prompt = new Prompt(List.of(system, user));
-        return convertJsonToList(chatClient.prompt(prompt).call().content());
+        List<Album> gptAlbumRecommendation = convertJsonToList(chatClient.prompt(prompt).call().content());
+
+        return spotifyService.search(token, gptAlbumRecommendation);
     }
 
     public static String getPrompt(String filePath) {
@@ -47,7 +54,6 @@ public class OpenAIService {
     }
 
     public List<Album> convertJsonToList(String json)  {
-        System.out.println(json);
         ObjectMapper objectMapper = new ObjectMapper();
         List<Album> albuns = null;
 
