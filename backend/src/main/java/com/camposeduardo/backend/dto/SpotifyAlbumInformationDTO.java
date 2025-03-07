@@ -14,4 +14,6 @@ public class SpotifyAlbumInformationDTO {
     private String name;
     @JsonProperty("images")
     private List<ImageDTO> imageDTO;
+    @JsonProperty("artists")
+    private List<ArtistDTO> artistDTOS;
 }
