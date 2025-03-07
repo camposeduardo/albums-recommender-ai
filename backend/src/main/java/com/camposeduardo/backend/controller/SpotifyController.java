@@ -33,8 +33,8 @@ public class SpotifyController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<SpotifyAlbumInformationDTO>> search(@RequestHeader("authorization") String token,
-                                                                   @RequestParam String search)  {
-        return ResponseEntity.ok().body(spotifyService.search(search, token));
+    public ResponseEntity<List<SpotifyAlbumInformationDTO>> search(@RequestHeader("Authorization") String token,
+                                                                   @RequestParam String album)  {
+        return ResponseEntity.ok().body(spotifyService.search(token, album));
     }
 }

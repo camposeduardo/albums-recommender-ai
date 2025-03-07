@@ -1,14 +1,11 @@
 package com.camposeduardo.backend.controller;
 
 
-import com.camposeduardo.backend.domain.Album;
+import com.camposeduardo.backend.dto.SpotifyAlbumInformationDTO;
 import com.camposeduardo.backend.service.OpenAIService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +17,12 @@ public class AlbumRecommenderController {
     private final OpenAIService openAiService;
 
     @GetMapping("/recommender")
-    public ResponseEntity<List<Album>> generateAlbumRecommendation(@RequestParam String album,
-                                                                   @RequestParam String artist
+    public ResponseEntity<List<SpotifyAlbumInformationDTO>> getAlbumRecommendation(
+            // later change to SpotifyAlbumInformation
+            @RequestParam String album,
+            @RequestParam String artist,
+            @RequestHeader("authorization") String spotifyToken
                                                                    ) {
-        return ResponseEntity.ok().body(openAiService.recommender(album, artist));
+        return ResponseEntity.ok().body(openAiService.generateAlbumRecommendations(album, artist, spotifyToken));
     }
 }
