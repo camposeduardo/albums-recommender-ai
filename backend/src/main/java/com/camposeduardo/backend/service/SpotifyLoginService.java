@@ -32,7 +32,7 @@ public class SpotifyLoginService {
                         "&scope=%s&code_challenge_method=S256&code_challenge=%s",
                 clientId,
                 "http://localhost:8080/",
-                "user-read-private user-read-email playlist-modify-public playlist-modify-private",
+                "user-read-private user-read-email user-library-modify",
                 codeChallenge
         );
 
