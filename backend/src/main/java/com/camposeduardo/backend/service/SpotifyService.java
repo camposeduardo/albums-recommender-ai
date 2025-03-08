@@ -2,13 +2,10 @@ package com.camposeduardo.backend.service;
 
 import com.camposeduardo.backend.domain.Album;
 import com.camposeduardo.backend.dto.SpotifyAlbumInformationDTO;
+import com.camposeduardo.backend.dto.SpotifyAlbumsDTO;
 import com.camposeduardo.backend.dto.SpotifySearchResponseDTO;
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -71,5 +68,27 @@ public class SpotifyService {
         }
 
         return albuns;
+    }
+
+    public String saveSpotifyAlbums(SpotifyAlbumsDTO spotifyAlbums, String token) {
+        System.out.println(spotifyAlbums);
+
+        String url = "https://api.spotify.com/v1/me/albums";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        HttpEntity<SpotifyAlbumsDTO> entity = new HttpEntity<>(spotifyAlbums,headers);
+        System.out.println(entity);
+
+        ResponseEntity<SpotifyAlbumsDTO> response = restTemplate.exchange(url, HttpMethod.PUT, entity,
+                SpotifyAlbumsDTO.class);
+        System.out.println(response);
+
+        if (response.getStatusCode() != HttpStatusCode.valueOf(200)) {
+            return "Albums were not saved successfully.";
+        }
+
+        return "Albums have been saved successfully.";
+
     }
 }
