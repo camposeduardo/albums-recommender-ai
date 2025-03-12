@@ -4,7 +4,7 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { HeroComponent } from "./hero/hero.component";
 import { HelpSectionComponent } from "./help-section/help-section.component";
 import { FooterComponent } from "./footer/footer.component";
-import { SearchComponent } from "./search/search.component";
+import { SearchComponent } from "./search-bar/search-bar.component";
 import { AlbumsComponent } from "./albums/albums.component";
 
 @Component({
