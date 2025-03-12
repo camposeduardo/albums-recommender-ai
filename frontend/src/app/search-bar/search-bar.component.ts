@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { AlbumsComponent } from "../albums/albums.component";
+import { RecommendationPageComponent } from "../recommendation-page/recommendation-page.component";
 
 
 @Component({
-  selector: 'search',
+  selector: 'search-bar',
   standalone: true,
-  imports: [AlbumsComponent],
+  imports: [RecommendationPageComponent],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.css'
 })
