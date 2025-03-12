@@ -5,11 +5,12 @@ import { HeroComponent } from "./hero/hero.component";
 import { HelpSectionComponent } from "./help-section/help-section.component";
 import { FooterComponent } from "./footer/footer.component";
 import { SearchComponent } from "./search/search.component";
+import { AlbumsComponent } from "./albums/albums.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NavbarComponent, HeroComponent, HelpSectionComponent, FooterComponent, SearchComponent],
+  imports: [NavbarComponent, HeroComponent, HelpSectionComponent, FooterComponent, SearchComponent, AlbumsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
