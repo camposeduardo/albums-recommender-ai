@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'albums',
+  selector: 'recommendation-page',
   standalone: true,
   imports: [],
   templateUrl: './recommendation-page.component.html',
