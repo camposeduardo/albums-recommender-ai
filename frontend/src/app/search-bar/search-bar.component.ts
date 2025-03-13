@@ -5,7 +5,7 @@ import { RecommendationPageComponent } from "../recommendation-page/recommendati
 @Component({
   selector: 'search-bar',
   standalone: true,
-  imports: [RecommendationPageComponent],
+  imports: [],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.css'
 })
