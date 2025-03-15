@@ -31,7 +31,7 @@ public class SpotifyLoginService {
                         "client_id=%s&response_type=code&redirect_uri=%s" +
                         "&scope=%s&code_challenge_method=S256&code_challenge=%s",
                 clientId,
-                "http://localhost:8080/",
+                "http://localhost:4200/album-recommender",
                 "user-read-private user-read-email user-library-modify",
                 codeChallenge
         );
@@ -49,7 +49,7 @@ public class SpotifyLoginService {
                 .queryParam("client_id", clientId)
                 .queryParam("grant_type", "authorization_code")
                 .queryParam("code", code)
-                .queryParam("redirect_uri", "http://localhost:8080/")
+                .queryParam("redirect_uri", "http://localhost:4200/album-recommender")
                 .queryParam("code_verifier", verifier)
                 .toUriString();
 
