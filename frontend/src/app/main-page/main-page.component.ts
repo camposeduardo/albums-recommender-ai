@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SearchBarComponent } from "../search-bar/search-bar.component";
 import { HelpSectionComponent } from '../help-section/help-section.component';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { SpotifyService } from '../services/spotify.service';
 
 @Component({
   selector: 'app-main-page',
@@ -12,15 +13,26 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 })
 export class MainPageComponent {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(queryParamMap => {
       if (queryParamMap.has('code')) {
         const code = queryParamMap.get('code');
-        localStorage.setItem('code', code!)
-        history.replaceState(null, '', window.location.pathname)
+        history.replaceState(null, '', window.location.pathname);
+        const verifier = localStorage.getItem('verifier');
+        this.getAccessToken(code!, verifier!);
       }
+    });
+  }
+
+  getAccessToken(code: string, verifier: string) {
+    console.log(code);
+    this.spotifyService.getAccessToken(code!, verifier!).subscribe({
+      next(value: any) {
+        localStorage.removeItem('verifier');
+        localStorage.setItem('token', value['access_token']);
+      },
     });
   }
 
