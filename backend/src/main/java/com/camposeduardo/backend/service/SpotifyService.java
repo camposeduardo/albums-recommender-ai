@@ -44,7 +44,6 @@ public class SpotifyService {
                 ResponseEntity<SpotifySearchResponseDTO> response = restTemplate.exchange(fullUrl,
                         HttpMethod.GET, entity,
                         SpotifySearchResponseDTO.class);
-                System.out.println(response);
 
                 SpotifySearchResponseDTO searchResponse = response.getBody();
 
@@ -56,7 +55,6 @@ public class SpotifyService {
             String fullUrl = String.format(url, album, 10);
             ResponseEntity<SpotifySearchResponseDTO> response = restTemplate.exchange(fullUrl, HttpMethod.GET, entity,
                     SpotifySearchResponseDTO.class);
-            System.out.println(response);
 
             SpotifySearchResponseDTO searchResponse = response.getBody();
 
@@ -64,7 +62,9 @@ public class SpotifyService {
                 throw new RuntimeException();
             }
 
-            albuns.addAll(searchResponse.albumsWrapper().albums());
+            for (SpotifyAlbumInformationDTO tempAlbum : searchResponse.albumsWrapper().albums()) {
+                albuns.add(tempAlbum);
+            }
         }
 
         return albuns;
@@ -78,11 +78,9 @@ public class SpotifyService {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
         HttpEntity<SpotifyAlbumsDTO> entity = new HttpEntity<>(spotifyAlbums,headers);
-        System.out.println(entity);
 
         ResponseEntity<SpotifyAlbumsDTO> response = restTemplate.exchange(url, HttpMethod.PUT, entity,
                 SpotifyAlbumsDTO.class);
-        System.out.println(response);
 
         if (response.getStatusCode() != HttpStatusCode.valueOf(200)) {
             return "Albums were not saved successfully.";
