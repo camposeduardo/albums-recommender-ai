@@ -2,14 +2,10 @@
   <div class="p-6 rounded-lg shadow-md w-full max-w-2xl bg-gradient-to-r from-purple-700 to-indigo-900">
       <div class="flex items-center gap-4 ">
           <div>
-              <label class="font-bold block mb-1">Artist</label>
-              <input #inputArtist type="text" placeholder="Enter artist" class="input input-bordered w-64 h-10 px-4 opacity-80 text-black" />
-          </div>
-          <div>
               <label class="font-bold block mb-1">Album</label>
-              <input #inputAlbum type="text" placeholder="Enter album" class="input input-bordered w-64 h-10 px-4 opacity-80 text-black" />
+              <input #inputAlbum type="text" placeholder="Enter album" class="input input-bordered w-130 h-10 px-4 opacity-80 text-black" />
           </div>
-          <button class="btn btn-outline text-black border-white bg-primary-content hover:bg-white hover:text-purple-700 ml-auto self-end h-10 px-4">Search</button>
+          <button type="submit" class="btn btn-outline text-black border-white bg-primary-content hover:bg-white hover:text-purple-700 ml-auto self-end h-10 px-4" (click)="onSearchAlbum(inputAlbum.value)">Search</button>
       </div>
   </div>
 </div>

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { RecommendationPageComponent } from "../recommendation-page/recommendation-page.component";
+import { RecommenderService } from '../services/recommender.service';
+import { Album } from '../interfaces/album';
+import { ActivatedRoute, Router, RouterConfigOptions } from '@angular/router';
+import { SpotifyService } from '../services/spotify.service';
 
 
 @Component({
@@ -11,11 +14,10 @@ import { RecommendationPageComponent } from "../recommendation-page/recommendati
 })
 export class SearchBarComponent {
 
-  albumResult: string = '';
-  artistResult: string = '';
+  constructor(private spotifyService: SpotifyService, private router: Router, private route: ActivatedRoute) {}
 
-  search(album: string, artist: string) {
-    this.albumResult = album;
-    this.artistResult = artist;
+  onSearchAlbum(album: string) {
+    this.spotifyService.searchAlbum(album);
+    this.router.navigate(['albums'], {relativeTo: this.route});
   }
 }
