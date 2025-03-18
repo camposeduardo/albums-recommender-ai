@@ -27,7 +27,6 @@ export class MainPageComponent {
   }
 
   getAccessToken(code: string, verifier: string) {
-    console.log(code);
     this.spotifyService.getAccessToken(code!, verifier!).subscribe({
       next(value: any) {
         localStorage.removeItem('verifier');
