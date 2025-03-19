@@ -21,10 +21,9 @@ public class AlbumRecommenderController {
 
     @GetMapping("/recommender")
     public ResponseEntity<List<SpotifyAlbumInformationDTO>> getAlbumRecommendation(
-            // later change to SpotifyAlbumInformation
             @RequestParam String album,
             @RequestParam String artist,
-            @RequestHeader("authorization") String spotifyToken
+            @RequestHeader("Authorization") String spotifyToken
                                                                    ) {
         return ResponseEntity.ok().body(openAiService.generateAlbumRecommendations(album, artist, spotifyToken));
     }
@@ -32,7 +31,7 @@ public class AlbumRecommenderController {
     @PutMapping("/save/albums")
     public ResponseEntity<String> saveAlbums(
             @RequestBody SpotifyAlbumsDTO spotifyAlbums,
-            @RequestHeader("authorization") String spotifyToken
+            @RequestHeader("Authorization") String spotifyToken
     ) {
         return ResponseEntity.ok().body(spotifyService.saveSpotifyAlbums(spotifyAlbums, spotifyToken));
     }
