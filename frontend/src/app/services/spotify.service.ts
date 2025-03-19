@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development'
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { Album } from '../interfaces/album';
 
 @Injectable({
@@ -33,9 +33,8 @@ export class SpotifyService {
       params: {
         'album': album
       }
-    }).subscribe(data => {
-      console.log(data)
-      this.albumDataSubject.next(data);
-    });;
+    }).pipe(map(response => {
+      this.albumDataSubject.next(response);
+    })).subscribe();
   }
 }
