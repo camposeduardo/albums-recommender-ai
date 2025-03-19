@@ -15,7 +15,7 @@
           <span *ngFor="let artistName of album.artists" class="text-base font-semibold opacity-60">
             {{artistName.name}}</span>
         </div>
-        <button class="btn btn-square btn-ghost">
+        <button class="btn btn-square btn-ghost" (click)="getRecommendations(album)">
           <svg class="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor">
               <path

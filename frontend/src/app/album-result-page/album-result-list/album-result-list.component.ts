@@ -3,6 +3,8 @@ import { RecommenderService } from '../../services/recommender.service';
 import { Album } from '../../interfaces/album';
 import { CommonModule } from '@angular/common';
 import { SpotifyService } from '../../services/spotify.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MainPageComponent } from '../../main-page/main-page.component';
 
 @Component({
   selector: 'album-result-list',
@@ -16,7 +18,9 @@ export class AlbumResultListComponent {
   albumsData$ = this.spotifyService.albumData$;
   currentAlbums: Album[] = [];
 
-  constructor (private spotifyService: SpotifyService) {}
+  constructor (private spotifyService: SpotifyService,
+    private recommenderService: RecommenderService,
+    private router: Router) {}
 
   ngOnInit() {
     this.loadData();
@@ -28,8 +32,12 @@ export class AlbumResultListComponent {
         this.currentAlbums = data;
       }
     });
-
   }
 
+  getRecommendations(album: Album) {
+    this.recommenderService.getRecommendations(album.name, album.artists[0].name).subscribe(data => {
+      this.router.navigate(['/album-recommender','recommendations']);
+    });
+  }
 
 }
