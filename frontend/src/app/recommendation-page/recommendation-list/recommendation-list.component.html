@@ -6,25 +6,35 @@
 </ng-template>
 
 <ng-container *ngIf="recommendationsData$ | async; else loading">
-  <div class="container mx-auto p-16">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-      <div class="card bg-base-100 shadow-xl" *ngFor="let album of recommendedAlbums" >
+  <div class="container mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+
+      <div class="card bg-base-100 shadow-xl" *ngFor="let album of recommendedAlbums">
         <figure>
-          <img [src]="album.images[1].url"
-            class="object-cover h-48 w-full" />
+          <img [src]="album.images[1].url" [alt]="album.name" class="object-cover h-48 w-full rounded-t-xl" />
         </figure>
         <div class="card-body">
-          <h2 class="card-title">{{album.name}}</h2>
-          <div class="card-actions justify-end">
-            <label class="toggle text-base-content">
-              <input type="checkbox">
-              <svg aria-label="enabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="4" fill="none" stroke="currentColor"><path d="M20 6 9 17l-5-5"></path></g></svg>
-              <svg aria-label="disabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          <h2 class="card-title text-lg font-bold">{{ album.name }}</h2>
+          <span *ngFor="let artist of album.artists" class="text-sm font-medium text-gray-500">
+            {{ artist.name }}
+          </span>
+
+          <div class="card-actions justify-end mt-2">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" class="sr-only peer">
+              <div class="w-12 h-6 bg-gray-300 peer-checked:bg-green-500 rounded-full transition-all relative">
+                <div
+                  class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-md peer-checked:translate-x-6 transition-transform">
+                </div>
+              </div>
+              <span class="text-gray-500 peer-checked:text-green-500 transition-colors text-sm font-medium">
+                Save on Spotify
+              </span>
             </label>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </ng-container>
-
