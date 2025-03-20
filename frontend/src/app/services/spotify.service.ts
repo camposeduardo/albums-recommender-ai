@@ -37,4 +37,11 @@ export class SpotifyService {
       this.albumDataSubject.next(response);
     })).subscribe();
   }
+
+  saveAlbum(ids: string[]) {
+    const token = localStorage.getItem('token')!;
+    return this.http.put(`${environment.apiUrl}/save/albums`, {ids: ids}, {headers: {
+      'Authorization': token
+    }} );
+  }
 }

@@ -21,7 +21,7 @@
 
           <div class="card-actions justify-end mt-2">
             <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" class="sr-only peer">
+              <input type="checkbox" class="sr-only peer" (click)="onSaveAlbum(album.id)">
               <div class="w-12 h-6 bg-gray-300 peer-checked:bg-green-500 rounded-full transition-all relative">
                 <div
                   class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-md peer-checked:translate-x-6 transition-transform">

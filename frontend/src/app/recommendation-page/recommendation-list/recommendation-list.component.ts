@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RecommenderService } from '../../services/recommender.service';
 import { Album } from '../../interfaces/album';
 import { CommonModule } from '@angular/common';
+import { SpotifyService } from '../../services/spotify.service';
 
 @Component({
   selector: 'recommendation-list',
@@ -15,7 +16,9 @@ export class RecommendationListComponent {
   recommendationsData$ = this.recommenderService.recommendations$;
   recommendedAlbums: Album[] = [];
 
-  constructor(private recommenderService: RecommenderService,) { }
+  constructor(private recommenderService: RecommenderService,
+              private spotifyService: SpotifyService
+  ) { }
 
   ngOnInit() {
     this.loadData();
@@ -27,5 +30,10 @@ export class RecommendationListComponent {
         this.recommendedAlbums = data;
       }
     });
+  }
+
+  onSaveAlbum(id: string) {
+    const ids = [id];
+    this.spotifyService.saveAlbum(ids).subscribe();
   }
 }
