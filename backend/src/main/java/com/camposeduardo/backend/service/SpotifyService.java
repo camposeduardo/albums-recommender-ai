@@ -70,9 +70,7 @@ public class SpotifyService {
         return albuns;
     }
 
-    public String saveSpotifyAlbums(SpotifyAlbumsDTO spotifyAlbums, String token) {
-        System.out.println(spotifyAlbums);
-
+    public void saveSpotifyAlbums(SpotifyAlbumsDTO spotifyAlbums, String token) {
         String url = "https://api.spotify.com/v1/me/albums";
 
         HttpHeaders headers = new HttpHeaders();
@@ -83,10 +81,7 @@ public class SpotifyService {
                 SpotifyAlbumsDTO.class);
 
         if (response.getStatusCode() != HttpStatusCode.valueOf(200)) {
-            return "Albums were not saved successfully.";
+            throw new RuntimeException( "Albums were not saved successfully.");
         }
-
-        return "Albums have been saved successfully.";
-
     }
 }

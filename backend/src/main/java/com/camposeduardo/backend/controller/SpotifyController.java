@@ -2,6 +2,7 @@ package com.camposeduardo.backend.controller;
 
 import com.camposeduardo.backend.dto.AccessTokenDTO;
 import com.camposeduardo.backend.dto.SpotifyAlbumInformationDTO;
+import com.camposeduardo.backend.dto.SpotifyAlbumsDTO;
 import com.camposeduardo.backend.service.SpotifyLoginService;
 import com.camposeduardo.backend.service.SpotifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,14 @@ public class SpotifyController {
     public ResponseEntity<List<SpotifyAlbumInformationDTO>> search(@RequestHeader("Authorization") String token,
                                                                    @RequestParam String album)  {
         return ResponseEntity.ok().body(spotifyService.search(token, album));
+    }
+
+    @PutMapping("/save/albums")
+    public ResponseEntity<Void> saveAlbums(
+            @RequestBody SpotifyAlbumsDTO spotifyAlbums,
+            @RequestHeader("Authorization") String spotifyToken
+    ) {
+        spotifyService.saveSpotifyAlbums(spotifyAlbums, spotifyToken);
+        return ResponseEntity.ok().build();
     }
 }
