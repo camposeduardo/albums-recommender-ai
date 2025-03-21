@@ -25,11 +25,7 @@ export class SpotifyService {
   }
 
   searchAlbum(album: string) {
-    const token = localStorage.getItem('token')!;
     return this.http.get<Album[]>(`${environment.apiUrl}/search`, {
-      headers: {
-        'Authorization': token
-      },
       params: {
         'album': album
       }
@@ -39,9 +35,6 @@ export class SpotifyService {
   }
 
   saveAlbum(ids: string[]) {
-    const token = localStorage.getItem('token')!;
-    return this.http.put(`${environment.apiUrl}/save/albums`, {ids: ids}, {headers: {
-      'Authorization': token
-    }} );
+    return this.http.put(`${environment.apiUrl}/save/albums`, {ids: ids});
   }
 }
