@@ -35,9 +35,8 @@ export class AlbumResultListComponent {
   }
 
   getRecommendations(album: Album) {
-    this.recommenderService.getRecommendations(album.name, album.artists[0].name).subscribe(data => {
-      this.router.navigate(['/album-recommender','recommendations']);
-    });
+    this.recommenderService.getRecommendations(album.name, album.artists[0].name).subscribe();
+    this.router.navigate(['/album-recommender','recommendations']);
   }
 
 }
