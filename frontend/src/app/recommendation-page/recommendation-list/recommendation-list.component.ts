@@ -17,7 +17,7 @@ export class RecommendationListComponent {
   recommendedAlbums: Album[] = [];
 
   constructor(private recommenderService: RecommenderService,
-              private spotifyService: SpotifyService
+    private spotifyService: SpotifyService
   ) { }
 
   ngOnInit() {
@@ -34,6 +34,10 @@ export class RecommendationListComponent {
 
   onSaveAlbum(id: string) {
     const ids = [id];
-    this.spotifyService.saveAlbum(ids).subscribe();
+    this.spotifyService.saveAlbum(ids).subscribe(data => {
+      this.recommendedAlbums = this.recommendedAlbums.filter(album => album.id !== id);
+    }
+    );
+
   }
 }
