@@ -13,7 +13,7 @@ import { SpotifyService } from '../services/spotify.service';
 })
 export class MainPageComponent {
 
-  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { }
+  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService, private router: Router) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(queryParamMap => {
@@ -22,6 +22,10 @@ export class MainPageComponent {
         history.replaceState(null, '', window.location.pathname);
         const verifier = localStorage.getItem('verifier');
         this.getAccessToken(code!, verifier!);
+      }
+      else {
+        localStorage.clear();
+        this.router.navigate(['home']);
       }
     });
   }
