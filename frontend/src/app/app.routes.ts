@@ -3,6 +3,7 @@ import { AlbumResultPageComponent } from './album-result-page/album-result-page.
 import { RecommendationPageComponent } from './recommendation-page/recommendation-page.component';
 import { HeroComponent } from './hero/hero.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -11,7 +12,7 @@ export const routes: Routes = [
     path: 'album-recommender', component: MainPageComponent, children: [
       { path: 'albums', component: AlbumResultPageComponent },
       { path: 'recommendations', component: RecommendationPageComponent },
-    ]
+    ], canActivate: [authGuard]
   },
 
 ];
