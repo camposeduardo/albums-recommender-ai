@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { SearchBarComponent } from "../search-bar/search-bar.component";
-import { HelpSectionComponent } from '../help-section/help-section.component';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { SpotifyService } from '../services/spotify.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { SpotifyService } from '../services/spotify.service';
 })
 export class MainPageComponent {
 
-  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(queryParamMap => {
@@ -22,10 +21,6 @@ export class MainPageComponent {
         history.replaceState(null, '', window.location.pathname);
         const verifier = localStorage.getItem('verifier');
         this.getAccessToken(code!, verifier!);
-      }
-      else {
-        localStorage.clear();
-        this.router.navigate(['home']);
       }
     });
   }

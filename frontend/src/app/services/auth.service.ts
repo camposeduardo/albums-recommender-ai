@@ -10,7 +10,7 @@ export class AuthService {
   isLogged() {
     const token = localStorage.getItem('token');
     if (token === null || token === undefined) {
-      return true;
+      return false;
     }
     return true;
   }

@@ -9,10 +9,11 @@ export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HeroComponent},
   {
-    path: 'album-recommender', component: MainPageComponent, children: [
+    path: 'album-recommender', component: MainPageComponent, canActivateChild: [authGuard],
+    children: [
       { path: 'albums', component: AlbumResultPageComponent },
       { path: 'recommendations', component: RecommendationPageComponent },
-    ], canActivate: [authGuard]
+    ]
   },
 
 ];
